@@ -3,4 +3,6 @@
         ~/.tmux.conf: tmux.conf
         ~/.vimrc: vimrc
         ~/.gitconfig: gitconfig
+        ~/.oh-my-zsh/custom/plugins: oh-my-zsh/plugins
+        ~/.zshrc: zshrc
 - shell: []
