@@ -3,3 +3,87 @@
 	name = Marc Queudot
 [core]
 	editor = vim
+[alias]
+    ## Traverse tree
+
+    # Show the filename where saved revisions are stored
+    saved-head-file = "!f() {                                                  \
+        if [ -z \"$MY_GIT_SAVED_HEAD_FILE\" ]; then                            \
+            echo \".git/MY_SAVED_HEAD\";                                       \
+        else                                                                   \
+            echo \"$MY_GIT_SAVED_HEAD_FILE\";                                  \
+        fi;                                                                    \
+        }; f"
+
+    # Save current HEAD
+    save = "!f() {                                                             \
+        local FILE=\"$(git saved-head-file)\";                                 \
+        local TARGET;                                                          \
+        TARGET=\"$(git symbolic-ref --short -q HEAD)\" ||                      \
+        TARGET=\"$(git rev-parse HEAD)\";                                      \
+        echo \"$TARGET\" > \"$FILE\";                                          \
+        }; f"
+
+    # Show saved revision, if any
+    saved-head = "!f() {                                                       \
+        local FILE=\"$(git saved-head-file)\";                                 \
+        if [ -f \"$FILE\" ]; then cat \"$FILE\"; fi;                           \
+        }; f"
+
+    # Delete saved revision, if any
+    forget = "!f() {                                                           \
+        local FILE=\"$(git saved-head-file)\";                                 \
+        if [ -f \"$FILE\" ]; then rm \"$FILE\"; fi;                            \
+        }; f"
+
+    # Go back n commits (default = 1)
+    # If no revision is saved, saves the current HEAD before going back
+    back = "!f() {                                                             \
+        local ORIGIN=\"$(git saved-head)\";                                    \
+        if [ -z \"$ORIGIN\" ]; then git save; fi;                              \
+        git checkout HEAD~\"$1\";                                              \
+        }; f"
+
+    # Go forward n commits (default = 1) towards the saved revision, if any
+    # When we reach the target, forget it
+    next = "!f() {                                                             \
+        local STEP=1;                                                          \
+        if [ ! -z \"$1\" ]; then STEP=\"$1\"; fi; \
+        local TARGET=\"$(git saved-head)\";                                    \
+        if [ -z \"$TARGET\" ]; then                                            \
+            >&2 echo \"No target is saved. Did you run 'git save'?\";          \
+            return;                                                            \
+        fi;                                                                    \
+        local CONTAINED=\"$(                                                   \
+            git branch --contains HEAD |                                       \
+            grep \"$TARGET\"                                                   \
+        )\";                                                                   \
+        if [ -z \"$CONTAINED\" ]; then                                         \
+            >&2 echo \"Saved target does not contain HEAD. Try 'git load'?\";  \
+            return;                                                            \
+        fi;                                                                    \
+        local LEFT=\"$(                                                        \
+            git rev-list --first-parent HEAD..\"$TARGET\" | wc -l              \
+        )\";                                                                   \
+        if [ \"$LEFT\" -eq 1 ]; then                                           \
+            git forget;                                                        \
+            git checkout \"$TARGET\";                                          \
+        else                                                                   \
+            git checkout \"$(                                                  \
+                git rev-list --reverse HEAD..\"$TARGET\" |                     \
+                head -n \"$STEP\"                        |                     \
+                tail -n 1                                                      \
+            )\";                                                               \
+        fi;                                                                    \
+        }; f"
+
+    # Go back to the saved revision, if any
+    load = "!f() {                                                             \
+        local TARGET=\"$(git saved-head)\";                                    \
+        if [ ! -z \"$TARGET\" ]; then                                          \
+            git checkout \"$TARGET\";                                          \
+        else                                                                   \
+            >&2 echo \"No HEAD is saved. Did you run 'git save'?\";            \
+        fi;                                                                    \
+        }; f"
+
