@@ -1,8 +1,9 @@
 - clean: []
 - link:
-        ~/.tmux.conf: tmux.conf
-        ~/.vimrc: vimrc
-        ~/.gitconfig: gitconfig
-        ~/.oh-my-zsh/custom/plugins: oh-my-zsh/plugins
-        ~/.zshrc: zshrc
-- shell: []
+    ~/.tmux.conf: tmux.conf
+    ~/.vimrc: vimrc
+    ~/.gitconfig: gitconfig
+    ~/.oh-my-zsh/custom/plugins: oh-my-zsh/plugins
+    ~/.zshrc: zshrc
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]
