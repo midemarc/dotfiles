@@ -6,3 +6,7 @@
 	path = oh-my-zsh/plugins/zsh-autosuggestions
 	url = git@github.com:zsh-users/zsh-autosuggestions.git
 	branch = master
+[submodule "oh-my-zsh/plugins/z"]
+	path = oh-my-zsh/plugins/z
+	url = git@github.com:rupa/z.git
+	branch = master

@@ -116,4 +116,7 @@ unsetopt BEEP
 
 export TERM="xterm-256color"
 
-
+# Useful scripts
+#""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+# Z (jump around)
+. $HOME/.oh-my-zsh/custom/plugins/z/z.sh
