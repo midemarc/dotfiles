@@ -106,6 +106,10 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias docker.stop-all='docker kill $(docker ps -q)'
+alias ve="python3 -m venv .env"
+alias va="source .env/bin/activate"
+
 # Turn off all beeps
 unsetopt BEEP
 # Turn off autocomplete beeps
