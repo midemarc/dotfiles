@@ -124,3 +124,5 @@ export TERM="xterm-256color"
 #""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # Z (jump around)
 . $HOME/.oh-my-zsh/custom/plugins/z/z.sh
+
+bindkey -v
