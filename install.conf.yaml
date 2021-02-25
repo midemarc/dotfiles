@@ -3,7 +3,8 @@
     ~/.tmux.conf: tmux.conf
     ~/.vimrc: vimrc
     ~/.gitconfig: gitconfig
-    ~/.oh-my-zsh/custom/plugins: oh-my-zsh/plugins
+    ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions: oh-my-zsh/plugins/zsh-autosuggestions
+    ~/.oh-my-zsh/custom/plugins/z: oh-my-zsh/plugins/z
     ~/.zshrc: zshrc
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
