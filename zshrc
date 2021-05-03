@@ -118,6 +118,9 @@ unsetopt BEEP
 # Turn off autocomplete beeps
 # unsetopt LIST_BEEP
 
+# Typing commands prefixed by a space does not record them in history
+setopt HIST_IGNORE_SPACE
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
