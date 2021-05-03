@@ -4,6 +4,7 @@
     ~/.vimrc: vimrc
     ~/.gitconfig: gitconfig
     ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions: oh-my-zsh/plugins/zsh-autosuggestions
+    ~/.oh-my-zsh/custom/plugins/zsh-history-substring-search: oh-my-zsh/plugins/zsh-history-substring-search
     ~/.oh-my-zsh/custom/plugins/z: oh-my-zsh/plugins/z
     ~/.zshrc: zshrc
 - shell:
